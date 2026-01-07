@@ -200,9 +200,21 @@ tickers_to_process = None
 # LOGIC: Load into Session State, Read from Session State
 if data_source == "Yahoo Finance":
     if YFINANCE_AVAILABLE:
-        default_tickers = "AAPL MSFT GOOG SPY GLD"
+        # Updated Default Tickers
+        default_tickers = "AAPL MSFT GOOG SPY GLD NVDA JNJ"
         ticker_input = st.sidebar.text_area("Enter Tickers (space separated):", default_tickers)
         period = st.sidebar.selectbox("History:", ["1y", "2y", "5y", "10y"], index=1)
+        
+        # --- AUTO-FETCH LOGIC ---
+        # If no data is currently loaded, automatically fetch the defaults on startup.
+        if st.session_state.raw_df is None:
+            tickers_list = list(set(ticker_input.upper().split()))
+            if len(tickers_list) >= 2:
+                with st.spinner("Initializing: Fetching market data..."):
+                    df = fetch_yahoo_data(tickers_list, period)
+                    if df is not None:
+                        st.session_state.raw_df = df
+
         if st.sidebar.button("Fetch Data"):
             tickers_list = list(set(ticker_input.upper().split()))
             if len(tickers_list) < 2:
@@ -233,7 +245,7 @@ else:
 
 # --- MAIN PAGE ---
 
-st.title("Junior Quant Lab")
+st.title("📊 Junior Quant Lab")
 st.markdown("""
 **Portfolio Construction & Risk Engine.** *By Paul Smith | Smith Academics*
 """)
