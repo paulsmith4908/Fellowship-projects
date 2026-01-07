@@ -189,7 +189,7 @@ def simulate_vasicek(r0, kappa, theta, sigma, T=1.0, dt=1/252, n_sims=100):
 
 # --- UI LAYOUT ---
 
-st.sidebar.title("⚙️ Controls")
+st.sidebar.title("Controls")
 
 # DATA INPUT (Moved to Sidebar)
 st.sidebar.subheader("1. Data Source")
@@ -245,9 +245,9 @@ else:
 
 # --- MAIN PAGE ---
 
-st.title("📊 Junior Quant Lab")
+st.title("Junior Quant Lab")
 st.markdown("""
-**Portfolio Construction & Risk Engine.** *By Paul Smith | Smith Academics*
+**Portfolio Construction & Risk Engine.** By Paul Smith | Smith Academics
 """)
 
 tab1, tab2 = st.tabs(["Efficient Frontier", "Rates (Vasicek)"])
@@ -452,7 +452,7 @@ with tab1:
         col_bottom_left, col_bottom_right = st.columns([1, 1])
 
         with col_bottom_left:
-            st.markdown("##### 🔗 Correlation Matrix")
+            st.markdown("##### Correlation Matrix")
             fig_corr = go.Figure(data=go.Heatmap(
                 z=corr_matrix.values, x=selected_tickers, y=selected_tickers,
                 colorscale='RdBu', zmin=-1, zmax=1,
@@ -462,7 +462,7 @@ with tab1:
             st.plotly_chart(fig_corr, use_container_width=True)
 
         with col_bottom_right:
-            st.markdown("##### 📋 Market Data Inspector")
+            st.markdown("##### Market Data Inspector")
             tab_prices, tab_rets = st.tabs(["Price History", "Daily Returns"])
             
             with tab_prices:
@@ -486,7 +486,7 @@ with tab1:
                 )
 
     else:
-        st.info("👈 Please load data from the Sidebar to begin.")
+        st.info("Please load data from the Sidebar to begin.")
 
 # --- TAB 2: STOCHASTIC RATES ---
 with tab2:
