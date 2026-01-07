@@ -233,7 +233,7 @@ else:
 
 # --- MAIN PAGE ---
 
-st.title("📊 Junior Quant Lab")
+st.title("Junior Quant Lab")
 st.markdown("""
 **Portfolio Construction & Risk Engine.** *By Paul Smith | Smith Academics*
 """)
